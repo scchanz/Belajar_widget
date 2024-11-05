@@ -1,40 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginPage(),
+    );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController ForgotController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( // Root widget
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('My Home Page'),
-        ),
-        body: Center(
-          child: Builder(
-            builder: (context) {
-              return Column(
-                children: [
-                  const Text('Hello, World!'),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      print('Click!');
-                    },
-                    child: const Text('A button'),
-                  ),
-                ],
-              );
-            },
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login Page'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('Daco_1834544.png',
+            width: 200,
+            height: 200,
+            ),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: ForgotController,
+              decoration: InputDecoration(
+                labelText: 'Forgot Password?',
+
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                
+                // Implementasi login
+                String email = emailController.text;
+                String password = passwordController.text;
+                // Di sini kamu bisa menambahkan logika untuk memvalidasi email dan password
+                print('Email: $email, Password: $password');
+
+                if (email.isEmpty || password.isEmpty) {
+                 ScaffoldMessenger.of(context).showSnackBar(
+                 SnackBar(content: Text('Email dan Password tidak boleh kosong!')),
+                );
+                return;
+                 }
+
+              },
+              child: Text('Login'),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
