@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                   const SizedBox(height: 8),
                   const Divider(color: Colors.black),
                   const Text(
-                    'Public but not secret',
+                    'Private but not secret',
                     style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(height: 20),
